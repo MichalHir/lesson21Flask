@@ -1,10 +1,13 @@
-from flask import Flask
+from flask import Flask,render_template
 
 app = Flask(__name__)
 # print: THIS IS A CONTACT LIST PAGE
 
-my_contacts = [{"name": "Ran", "age": 44},
-              {"name": "Itzik", "age": 21}]
+my_contacts = [
+    {"name": "Ran", "age": 44, "email": "admin@", "phone": 6546895865},
+    {"name": "aviad", "age": 21, "email": "admin@", "phone": 6546895865},
+    {"name": "tal", "age": 25, "email": "admin@", "phone": 6546895865},
+]
 
 
 @app.route("/")
@@ -13,23 +16,40 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.route("/contacts") 
-# http://127.0.0.1:9000/contacts works 
-def contacts_list():
-   final_html_str = ''
-   for contact in my_contacts:
-       final_html_str += f"{contact['name']} - {contact['age']}<br>"
-   return final_html_str
+@app.route("/contacts")
+# http://127.0.0.1:9000/contacts works
+def contact_list():
+    return render_template('contacts_list.html', contacts = my_contacts)
+    # final_html_str = ""
+    # for contact in my_contacts:
+    #     final_html_str += f"<li>{contact['name']} - {contact['age']} - {contact['email']} - {contact['phone']}</li>"
+    # return final_html_str
+
 
 @app.route("/single contact/<int:index>")
 # http://127.0.0.1:9000/single%20contact/1 works
 def single_contact(index):
-   return f"<h1>Single Contact Page </h1><h2>{my_contacts[index]['name']}"
+    return f"<h1>Single Contact Page </h1><li>the user is {my_contacts[index]['name']} the age is {my_contacts[index]['age']} the email is {my_contacts[index]['email']} the phone is {my_contacts[index]['phone']}</li>"
+# return f"user is {my_contacts[index]["name"]} - {my_contacts[index]["phone"]}"
+
 
 @app.route("/add contact")
-# http://127.0.0.1:9000/add%20contact works
+# http://127.0.0.1:9000/add%20contact
+# return "please add a contact"
 def add_contact():
-   return f"<h1>add Contact Page </h1><h2>"
+    name = input("name?")
+    age = input("age?")
+    email = input("email?")
+    phone = input("phone?")
+    new_contact = {"name": name, "age": age, "email": email, "phone": phone}
+    my_contacts.append(new_contact)
+    return f"<h1>add Contact Page </h1><h2>the user is {my_contacts[len(my_contacts)-1]['name']}, age {my_contacts[len(my_contacts)-1]['age']}, email {my_contacts[len(my_contacts)-1]['email']}, phone number {my_contacts[len(my_contacts)-1]['phone']}</h2>"
+
+
+@app.route("/write name/<username>")
+# http://127.0.0.1:9000/write%20name/ran works
+def write_name(username):
+    return f"<h1>the name is {username} </h1><h2>"
 
 
 if __name__ == "__main__":
