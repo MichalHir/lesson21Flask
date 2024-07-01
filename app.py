@@ -1,3 +1,17 @@
+# הוסיפו טמפלייט לדף איש קשר בודד. 
+
+# תכניסו בדפים - bootstrap
+
+# הוסיפו דף שמראה favorite contacts, 
+# contact הוסיפו לכל boolean is_favorite 
+# במידה והוא true הראו את ה-contact
+# השתמשו ב-   ….. {% for … %} {% if %} ….
+# (קראו את אנשי הקשר מ-json בתחילת התוכנית)
+# https://docs.google.com/presentation/d/19BG6nZu9NuCUwFezrRLWIgUll0uzOvyn-0G-GZTETOI/edit#slide=id.g2e7121aab36_0_125
+# page 78
+
+
+
 from flask import Flask,render_template
 
 app = Flask(__name__)
