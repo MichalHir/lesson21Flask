@@ -10,6 +10,8 @@
 # https://docs.google.com/presentation/d/19BG6nZu9NuCUwFezrRLWIgUll0uzOvyn-0G-GZTETOI/edit#slide=id.g2e7121aab36_0_125
 # page 78
 
+# https://github.com/ranerlich7/flask_contacts
+
 
 
 from flask import Flask,render_template
@@ -17,11 +19,11 @@ from flask import Flask,render_template
 app = Flask(__name__)
 # print: THIS IS A CONTACT LIST PAGE
 
-my_contacts = [
-    {"name": "Ran", "age": 44, "email": "admin@", "phone": 6546895865},
-    {"name": "aviad", "age": 21, "email": "admin@", "phone": 6546895865},
-    {"name": "tal", "age": 25, "email": "admin@", "phone": 6546895865},
-]
+# my_contacts = [
+#     {"name": "Ran", "age": 44, "email": "admin@", "phone": 6546895865, "fav":True},
+#     {"name": "aviad", "age": 21, "email": "admin@", "phone": 6546895865, "fav":False},
+#     {"name": "tal", "age": 25, "email": "admin@", "phone": 6546895865, "fav":False},
+# ]
 
 
 @app.route("/")
@@ -38,6 +40,11 @@ def contact_list():
     # for contact in my_contacts:
     #     final_html_str += f"<li>{contact['name']} - {contact['age']} - {contact['email']} - {contact['phone']}</li>"
     # return final_html_str
+
+@app.route("/fav contacts")
+# http://127.0.0.1:9000//fav%20contacts
+def fav_contact_list():
+    return render_template('fav_list.html', contacts = my_contacts)
 
 
 @app.route("/single contact/<int:index>")
